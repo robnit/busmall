@@ -52,7 +52,16 @@ var secondImage = document.createElement('img');
 var thirdImage = document.createElement('img');
 
 //Generate three random indices for image Array
-
+function randomThreeImages(){
+    var selected = [];
+    while (selected.length < 3){
+        var imageToAdd = imageArray[Math.floor(Math.random() * imageArray.length)];
+        if (!selected.includes(imageToAdd)){ //Verify that image is not already in selected array
+            selected.push(imageToAdd);
+        }
+    }
+    return selected;
+}
 
 //Set src attribute to images
 firstImage.setAttribute( 'src', imageArray[0].filePath );
@@ -65,3 +74,5 @@ thirdImage.setAttribute( 'src', imageArray[2].filePath );
 image1.appendChild(firstImage);
 image2.appendChild(secondImage);
 image3.appendChild(thirdImage);
+
+randomThreeImages();
