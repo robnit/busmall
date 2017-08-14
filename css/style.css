@@ -6,7 +6,7 @@ main {
 }
 
 img {
-    width: 200px;
+    height: 220px;
     border: 1px;
     color: black;
     border-style: solid;
@@ -15,7 +15,7 @@ img {
 #images {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     list-style: none;
-    width: 60%;
+    width: 80%;
 }

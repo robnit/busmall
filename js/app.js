@@ -31,10 +31,10 @@ function initializeImages(){
     var petsweep = new ImageDisplay('Pet Sweep','image/pet-sweep.jpg','petsweep');
     var scissors = new ImageDisplay('Scissors','image/scissors.jpg','scissors');
     var shark = new ImageDisplay('Shark','image/shark.jpg','shark');
-    var sweep = new ImageDisplay('Sweep','image/sweep.jpg','sweep');
+    var sweep = new ImageDisplay('Sweep','image/sweep.png','sweep');
     var tauntaun = new ImageDisplay('Tauntaun','image/tauntaun.jpg','tauntaun');
     var unicorn = new ImageDisplay('Unicorn','image/unicorn.jpg','unicorn');
-    var usb = new ImageDisplay('USB','image/usb.jpg','usb');
+    var usb = new ImageDisplay('USB','image/usb.gif','usb');
     var watercan = new ImageDisplay('Water Can','image/water-can.jpg','watercan');
     var wineglass = new ImageDisplay('Wine Glass','image/wine-glass.jpg','wineglass');
 }
@@ -52,21 +52,24 @@ var secondImage = document.createElement('img');
 var thirdImage = document.createElement('img');
 
 //Generate three random indices for image Array
-function randomThreeImages(){
+
+function randomThreeNumbers(){
     var selected = [];
     while (selected.length < 3){
-        var imageToAdd = imageArray[Math.floor(Math.random() * imageArray.length)];
-        if (!selected.includes(imageToAdd)){ //Verify that image is not already in selected array
-            selected.push(imageToAdd);
+        var numberToAdd = Math.floor(Math.random() * imageArray.length);
+        if (!selected.includes(numberToAdd)){
+            selected.push(numberToAdd);
         }
     }
     return selected;
 }
 
+var threeImages = randomThreeNumbers();
+
 //Set src attribute to images
-firstImage.setAttribute( 'src', imageArray[0].filePath );
-secondImage.setAttribute( 'src', imageArray[1].filePath );
-thirdImage.setAttribute( 'src', imageArray[2].filePath );
+firstImage.setAttribute( 'src', imageArray[threeImages[0]].filePath );
+secondImage.setAttribute( 'src', imageArray[threeImages[1]].filePath );
+thirdImage.setAttribute( 'src', imageArray[threeImages[2]].filePath );
 
 //TO DO: Display image.name property alongside corresponding image
 
@@ -74,5 +77,3 @@ thirdImage.setAttribute( 'src', imageArray[2].filePath );
 image1.appendChild(firstImage);
 image2.appendChild(secondImage);
 image3.appendChild(thirdImage);
-
-randomThreeImages();
