@@ -1,6 +1,21 @@
-body {
+main {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+}
+
+img {
+    width: 200px;
+    border: 1px;
+    color: black;
+    border-style: solid;
+}
+
+#images {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    list-style: none;
+    width: 60%;
 }

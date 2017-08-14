@@ -18,7 +18,7 @@ ImageDisplay.prototype.addToDom = function() {
 function initializeImages(){
     var bag = new ImageDisplay('Bag', 'image/bag.jpg', 'bag');
     var banana = new ImageDisplay('Banana', 'image/banana.jpg', 'banana');
-    var bathroom = new ImageDisplay('Bathroom', 'image/bathroom', 'bathroom');
+    var bathroom = new ImageDisplay('Bathroom', 'image/bathroom.jpg', 'bathroom');
     var boots = new ImageDisplay('Boots', 'image/boots.jpg', 'boots');
 }
 
@@ -38,3 +38,6 @@ thirdImage.setAttribute( 'src', imageArray[2].filePath );
 
 //Display Images
 
+image1.appendChild(firstImage);
+image2.appendChild(secondImage);
+image3.appendChild(thirdImage);
