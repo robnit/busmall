@@ -67,9 +67,9 @@ function randomThreeNumbers(){
 var threeImages = randomThreeNumbers();
 
 //Set src attribute to images
-firstImage.setAttribute( 'src', imageArray[threeImages[0]].filePath );
-secondImage.setAttribute( 'src', imageArray[threeImages[1]].filePath );
-thirdImage.setAttribute( 'src', imageArray[threeImages[2]].filePath );
+firstImage.setAttribute( 'src' , imageArray[threeImages[0]].filePath );
+secondImage.setAttribute( 'src' , imageArray[threeImages[1]].filePath );
+thirdImage.setAttribute( 'src' , imageArray[threeImages[2]].filePath );
 
 //TO DO: Display image.name property alongside corresponding image
 
@@ -77,3 +77,12 @@ thirdImage.setAttribute( 'src', imageArray[threeImages[2]].filePath );
 image1.appendChild(firstImage);
 image2.appendChild(secondImage);
 image3.appendChild(thirdImage);
+
+//Event Listeners
+container1.addEventListener('click', eventHandler);
+container2.addEventListener('click', eventHandler);
+container3.addEventListener('click', eventHandler);
+
+function eventHandler(e){
+    
+}
