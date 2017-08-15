@@ -6,7 +6,7 @@ function ImageDisplay (name, filePath, elementId) {
     this.name = name;
     this.filePath = filePath;
     this.elementId = elementId;
-    // this.displayCount = 0; May not be necessary 
+    this.displayCount = 0
     this.voteCount = 0;
 
     //Push new object to imageArray
@@ -44,6 +44,7 @@ function randomThreeNumbers(){
         if ( !forbiddenIndexes.includes(numberToAdd) ) {
             if ( !selected.includes(numberToAdd) ) {
                 selected.push(numberToAdd);
+                imageArray[numberToAdd].displayCount++;
             }
         }
     }
