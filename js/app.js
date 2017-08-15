@@ -15,7 +15,7 @@ function ImageDisplay (name, filePath, elementId) {
 }
 
 //Populate imageArray with all image objects
-function initializeImages(){
+function initializeImages() {
     var bag = new ImageDisplay('Bag', 'image/bag.jpg', 'bag');
     var banana = new ImageDisplay('Banana', 'image/banana.jpg', 'banana');
     var bathroom = new ImageDisplay('Bathroom', 'image/bathroom.jpg', 'bathroom');
@@ -39,7 +39,7 @@ function initializeImages(){
 }
 
 //Generate three random indices for image Array
-function randomThreeNumbers(){
+function randomThreeNumbers() {
     var selected = [];
     while (selected.length < 3){
         var numberToAdd = Math.floor(Math.random() * imageArray.length);
@@ -56,7 +56,7 @@ function randomThreeNumbers(){
 
 //Generates array of three random numbers, displays corresponding images from imageArray
 function addToDom() {
-    if ( voteCounter < 3 ){
+    if ( voteCounter < 25 ){
         //create containers for images
         var container = document.getElementById('images');
 
@@ -105,53 +105,44 @@ function addToDom() {
             allResults.appendChild(results);
         }
         //Chart Stuff Below
-        var chartCanvas = document.getElementById( 'chart' );
+        var chartCanvas = document.getElementById( 'chart' ).getContext( '2d' );
         //Create array variable for labels of all imageArray items
         var allLabels = [];
+        var allVoteCounts = [];
         for (var i = 0; i < imageArray.length; i++) {
             allLabels.push(imageArray[i].name);
+            allVoteCounts.push(imageArray[i].voteCount);
         }
         var dataChart = new Chart (chartCanvas, {
             type: 'bar',
             data: {
-                labels: ['jan', 'feb', 'mar'],
-                datasets: [{ 
-                    labels: 'american airlines', 
-                    data: [100, 50, 600, 800],
-                    lineTension: 0,
-                },{
-                    labels: 'delta',
-                    data: [420, 69, 420, 69],
-                    lineTension: 0,
-                    backgroundColor: 'rgb(255,255,255)',
+                labels: allLabels,
+                datasets: [{
+                    labels: 'Voter 1',
+                    data: allVoteCounts,
+                   
                 }]
             },
             options: {
                 title: {
                     display: true,
-                    text: 'flight prices',
+                    text: 'Votes',
                 },
                 legend: {
                     display: false
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }]
                 }
             }
         
         });
-    
-        /*
-    {
-            type:'bar',
-            data: {
-                labels: [;bag', 'banana', '...'],
-                datasets: [
-                    {
-                        label: 'Voter 1', //label for votes
-                        data [0,4,3,9] // number of votes corresponding with label
-                    }
-                ]
-            }
     }
-};
+}
 
 //On click, uptick vote count of respective item in imageArray, run removeFromDom & addToDom methods
 function eventHandler(){
