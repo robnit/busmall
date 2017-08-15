@@ -79,17 +79,23 @@ function addToDom() {
     container1.addEventListener('click', eventHandler);
     container2.addEventListener('click', eventHandler);
     container3.addEventListener('click', eventHandler);
-
 };
+
+function eventHandler(){
+    removeFromDom();
+    console.log('click detected');
+}
 
 //Removes the current three images. TO DO: store their values somehow?
 function removeFromDom() {
-    
+    var imageContainer = document.getElementById('image1');
+    imageContainer.innerHTML = '';
+    imageContainer = document.getElementById('image2');
+    imageContainer.innerHTML = '';
+    imageContainer = document.getElementById('image3');
+    imageContainer.innerHTML = '';
 }
 
 initializeImages();
 addToDom();
 
-function eventHandler(e){
-    addToDom();
-}
