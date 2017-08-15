@@ -61,12 +61,18 @@ function addToDom() {
     var secondImage = document.createElement('img');
     var thirdImage = document.createElement('img');
 
+    //Generate three random numbers and assign to threeImages variable
     var threeImages = randomThreeNumbers();
 
     //Set src attribute to images
     firstImage.setAttribute( 'src' , imageArray[threeImages[0]].filePath );
     secondImage.setAttribute( 'src' , imageArray[threeImages[1]].filePath );
     thirdImage.setAttribute( 'src' , imageArray[threeImages[2]].filePath );
+
+    //Assign data index to image containers  MIGHT NOT BE NECESSARY
+    firstImage.setAttribute( 'data-index' , threeImages[0] );
+    secondImage.setAttribute( 'data-index' , threeImages[1] );
+    thirdImage.setAttribute( 'data-index' , threeImages[2] );
 
     //TO DO: Display image.name property alongside corresponding image
 
@@ -79,14 +85,17 @@ function addToDom() {
     container1.addEventListener('click', eventHandler);
     container2.addEventListener('click', eventHandler);
     container3.addEventListener('click', eventHandler);
+
+    return [threeImages[0], threeImages[1], threeImages[2]];
 };
 
 function eventHandler(){
+    console.log(event.target.getAttribute( 'data-index')); //!!!!!!!!!!!!
     removeFromDom();
-    console.log('click detected');
+    addToDom();
 }
 
-//Removes the current three images. TO DO: store their values somehow?
+//Removes the current three images. TO DO: store their values somehow? Possibly change this to "repopulate DOM"
 function removeFromDom() {
     var imageContainer = document.getElementById('image1');
     imageContainer.innerHTML = '';
