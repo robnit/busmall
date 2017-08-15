@@ -103,6 +103,7 @@ function addToDom() {
         for (var i = 0; i < imageArray.length; i++ ){
             results = document.createElement('li');
             results.innerHTML = imageArray[i].name + ': ' + imageArray[i].voteCount + ' votes';
+            allResults.appendChild(results);
         }
     }
 };
