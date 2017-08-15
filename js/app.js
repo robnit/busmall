@@ -90,7 +90,6 @@ function addToDom() {
         forbiddenIndices = [threeImages[0], threeImages[1], threeImages[2]];
     }
     else {
-
         var resultsContainer = document.getElementById('images');
         resultsContainer.innerHTML = '';
         var results = document.createElement('ul');
@@ -111,7 +110,7 @@ function addToDom() {
             allVoteCounts.push(imageArray[i].voteCount);
         }
         var dataChart = new Chart (chartCanvas, {
-            type: 'bar',
+            type: 'horizontalBar',
             data: {
                 labels: allLabels,
                 datasets: [{
@@ -129,7 +128,7 @@ function addToDom() {
                     display: false
                 },
                 scales: {
-                    yAxes: [{
+                    xAxes: [{
                         ticks: {
                             stepSize: 1
                         }
