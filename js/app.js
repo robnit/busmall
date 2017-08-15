@@ -1,5 +1,6 @@
 //Create blank array to store all image objects
 var imageArray = [];
+var forbiddenIndexes = [];
 
 function ImageDisplay (name, filePath, elementId) {
     this.name = name;
@@ -89,7 +90,8 @@ function addToDom() {
 };
 
 function eventHandler(){
-    console.log(imageArray[event.target.getAttribute( 'data-index')].name); //!!!!!!!!!!!!
+    //On click, uptick vote count of respective item in imageArray
+    console.log(imageArray[event.target.getAttribute( 'data-index')].name);
     imageArray[event.target.getAttribute( 'data-index')].voteCount++;
     removeFromDom();
     addToDom();
