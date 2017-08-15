@@ -90,12 +90,6 @@ function addToDom() {
         forbiddenIndices = [threeImages[0], threeImages[1], threeImages[2]];
     }
     else {
-        var resultsContainer = document.getElementById('images');
-        resultsContainer.innerHTML = '';
-        var results = document.createElement('ul');
-        results.id = 'results';
-        resultsContainer.appendChild(results);
-
         //Generate chart based on chart.js library
         var chartCanvas = document.getElementById( 'chart' ).getContext( '2d' );
         //Remove h1 and image container elements
