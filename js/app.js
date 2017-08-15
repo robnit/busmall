@@ -44,7 +44,6 @@ function randomThreeNumbers() {
     while (selected.length < 3){
         var numberToAdd = Math.floor(Math.random() * imageArray.length);
         if ( !forbiddenIndices.includes(numberToAdd) ) {
-            // console.log(forbiddenIndices + ' does not include ' + numberToAdd);
             if ( !selected.includes(numberToAdd) ) {
                 selected.push(numberToAdd);
                 imageArray[numberToAdd].displayCount++;
@@ -56,7 +55,7 @@ function randomThreeNumbers() {
 
 //Generates array of three random numbers, displays corresponding images from imageArray
 function addToDom() {
-    if ( voteCounter < 5 ){
+    if ( voteCounter < 25 ){
         //create containers for images
         var container = document.getElementById('images');
 
@@ -85,28 +84,26 @@ function addToDom() {
         image2.appendChild(secondImage);
         image3.appendChild(thirdImage);
 
-        //Event Listeners //TO DO: make just one listener and use bubbling
+        //Event Listeners 
         container.addEventListener('click', eventHandler);
 
         forbiddenIndices = [threeImages[0], threeImages[1], threeImages[2]];
     }
     else {
-        // container.removeEventListener('click', eventHandler)
+
         var resultsContainer = document.getElementById('images');
         resultsContainer.innerHTML = '';
         var results = document.createElement('ul');
         results.id = 'results';
         resultsContainer.appendChild(results);
-        //Populate results list -- TO DO: Put chart stuff here
-        // var allResults = document.getElementById('results');
-        // for (var i = 0; i < imageArray.length; i++ ){
-        //     results = document.createElement('li');
-        //     results.innerHTML = imageArray[i].name + ': ' + imageArray[i].voteCount + ' votes';
-        //     allResults.appendChild(results);
-        // }
-        //Chart Stuff Below
+
+        //Generate chart based on chart.js library
         var chartCanvas = document.getElementById( 'chart' ).getContext( '2d' );
-        //Create array variable for labels of all imageArray items
+        //Remove h1 and image container elements
+        document.querySelector('h1').outerHTML = '';
+        document.getElementById('images').outerHTML = '';
+
+        //Create arrays for names and voteCounts of all imageArray items
         var allLabels = [];
         var allVoteCounts = [];
         for (var i = 0; i < imageArray.length; i++) {
