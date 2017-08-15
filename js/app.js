@@ -56,7 +56,7 @@ function randomThreeNumbers() {
 
 //Generates array of three random numbers, displays corresponding images from imageArray
 function addToDom() {
-    if ( voteCounter < 25 ){
+    if ( voteCounter < 5 ){
         //create containers for images
         var container = document.getElementById('images');
 
@@ -98,12 +98,12 @@ function addToDom() {
         results.id = 'results';
         resultsContainer.appendChild(results);
         //Populate results list -- TO DO: Put chart stuff here
-        var allResults = document.getElementById('results');
-        for (var i = 0; i < imageArray.length; i++ ){
-            results = document.createElement('li');
-            results.innerHTML = imageArray[i].name + ': ' + imageArray[i].voteCount + ' votes';
-            allResults.appendChild(results);
-        }
+        // var allResults = document.getElementById('results');
+        // for (var i = 0; i < imageArray.length; i++ ){
+        //     results = document.createElement('li');
+        //     results.innerHTML = imageArray[i].name + ': ' + imageArray[i].voteCount + ' votes';
+        //     allResults.appendChild(results);
+        // }
         //Chart Stuff Below
         var chartCanvas = document.getElementById( 'chart' ).getContext( '2d' );
         //Create array variable for labels of all imageArray items
@@ -120,13 +120,13 @@ function addToDom() {
                 datasets: [{
                     labels: 'Voter 1',
                     data: allVoteCounts,
-                   
                 }]
             },
             options: {
+                responsive: false,
                 title: {
                     display: true,
-                    text: 'Votes',
+                    text: 'Vote Breakdown',
                 },
                 legend: {
                     display: false
@@ -139,7 +139,6 @@ function addToDom() {
                     }]
                 }
             }
-        
         });
     }
 }
