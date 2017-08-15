@@ -5,7 +5,7 @@ function ImageDisplay (name, filePath, elementId) {
     this.name = name;
     this.filePath = filePath;
     this.elementId = elementId;
-    this.displayCount = 0;
+    // this.displayCount = 0; May not be necessary 
     this.voteCount = 0;
 
     //Push new object to imageArray
@@ -49,7 +49,6 @@ function randomThreeNumbers(){
 
 //Generates array of three random numbers, displays corresponding images from imageArray
 function addToDom() {
-    console.log('you are in the addToDom method');
 
     //create containers for images
     var container1 = document.getElementById('image1');
@@ -90,7 +89,8 @@ function addToDom() {
 };
 
 function eventHandler(){
-    console.log(event.target.getAttribute( 'data-index')); //!!!!!!!!!!!!
+    console.log(imageArray[event.target.getAttribute( 'data-index')].name); //!!!!!!!!!!!!
+    imageArray[event.target.getAttribute( 'data-index')].voteCount++;
     removeFromDom();
     addToDom();
 }
