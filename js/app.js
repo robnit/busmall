@@ -44,6 +44,7 @@ function randomThreeNumbers(){
     while (selected.length < 3){
         var numberToAdd = Math.floor(Math.random() * imageArray.length);
         if ( !forbiddenIndices.includes(numberToAdd) ) {
+            // console.log(forbiddenIndices + ' does not include ' + numberToAdd);
             if ( !selected.includes(numberToAdd) ) {
                 selected.push(numberToAdd);
                 imageArray[numberToAdd].displayCount++;
@@ -55,11 +56,11 @@ function randomThreeNumbers(){
 
 //Generates array of three random numbers, displays corresponding images from imageArray
 function addToDom() {
-    if ( voteCounter < 25 ){
+    if ( voteCounter < 3 ){
         //create containers for images
-        var container1 = document.getElementById('image1');
-        var container2 = document.getElementById('image2');
-        var container3 = document.getElementById('image3');
+        var container = document.getElementById('images');
+        // var container2 = document.getElementById('image2');
+        // var container3 = document.getElementById('image3');
 
         //create images
         var firstImage = document.createElement('img');
@@ -86,14 +87,15 @@ function addToDom() {
         image2.appendChild(secondImage);
         image3.appendChild(thirdImage);
 
-        //Event Listeners
-        container1.addEventListener('click', eventHandler);
-        container2.addEventListener('click', eventHandler);
-        container3.addEventListener('click', eventHandler);
+        //Event Listeners //TO DO: make just one listener and use bubbling
+        container.addEventListener('click', eventHandler);
+        // container2.addEventListener('click', eventHandler);
+        // container3.addEventListener('click', eventHandler);
 
         forbiddenIndices = [threeImages[0], threeImages[1], threeImages[2]];
     }
     else {
+        // container.removeEventListener('click', eventHandler)
         var resultsContainer = document.getElementById('images');
         resultsContainer.innerHTML = '';
         var results = document.createElement('ul');
