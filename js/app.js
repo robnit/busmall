@@ -99,17 +99,21 @@ function addToDom() {
         //Create arrays for names and voteCounts of all imageArray items
         var allLabels = [];
         var allVoteCounts = [];
+        var randomColors = [];
         for (var i = 0; i < imageArray.length; i++) {
             allLabels.push(imageArray[i].name);
             allVoteCounts.push(imageArray[i].voteCount);
+            randomColors.push('#' + Math.random().toString(16).slice(2, 8).toUpperCase());
         }
         var dataChart = new Chart (chartCanvas, {
             type: 'horizontalBar',
             data: {
                 labels: allLabels,
                 datasets: [{
-                    labels: 'Voter 1',
+                    // labels: 'Voter 1',
                     data: allVoteCounts,
+                    backgroundColor: randomColors
+                    
                 }]
             },
             options: {
