@@ -1,6 +1,6 @@
 //Create blank array to store all image objects
 var imageArray = [];
-var forbiddenIndexes = [];
+var forbiddenIndexes = ['','',''];
 
 function ImageDisplay (name, filePath, elementId) {
     this.name = name;
@@ -36,13 +36,15 @@ function initializeImages(){
     var wineglass = new ImageDisplay('Wine Glass','image/wine-glass.jpg','wineglass');
 }
 
-//Generate three random indices for image Array
+//Generate three random indices for image Array TO DO: ADD FORBIDDENVARIABLE CLAUSE
 function randomThreeNumbers(){
     var selected = [];
     while (selected.length < 3){
         var numberToAdd = Math.floor(Math.random() * imageArray.length);
-        if (!selected.includes(numberToAdd)){
-            selected.push(numberToAdd);
+        if ( !forbiddenIndexes.includes(numberToAdd) ) {
+            if ( !selected.includes(numberToAdd) ) {
+                selected.push(numberToAdd);
+            }
         }
     }
     return selected;
@@ -86,7 +88,7 @@ function addToDom() {
     container2.addEventListener('click', eventHandler);
     container3.addEventListener('click', eventHandler);
 
-    return [threeImages[0], threeImages[1], threeImages[2]];
+    forbiddenIndexes = [threeImages[0], threeImages[1], threeImages[2]];
 };
 
 function eventHandler(){
