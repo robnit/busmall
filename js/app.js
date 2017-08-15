@@ -39,6 +39,18 @@ function initializeImages(){
     var wineglass = new ImageDisplay('Wine Glass','image/wine-glass.jpg','wineglass');
 }
 
+//Generate three random indices for image Array
+function randomThreeNumbers(){
+    var selected = [];
+    while (selected.length < 3){
+        var numberToAdd = Math.floor(Math.random() * imageArray.length);
+        if (!selected.includes(numberToAdd)){
+            selected.push(numberToAdd);
+        }
+    }
+    return selected;
+}
+
 initializeImages();
 
 //create containers for images
@@ -50,19 +62,6 @@ var container3 = document.getElementById('image3');
 var firstImage = document.createElement('img');
 var secondImage = document.createElement('img');
 var thirdImage = document.createElement('img');
-
-//Generate three random indices for image Array
-
-function randomThreeNumbers(){
-    var selected = [];
-    while (selected.length < 3){
-        var numberToAdd = Math.floor(Math.random() * imageArray.length);
-        if (!selected.includes(numberToAdd)){
-            selected.push(numberToAdd);
-        }
-    }
-    return selected;
-}
 
 var threeImages = randomThreeNumbers();
 
@@ -84,5 +83,5 @@ container2.addEventListener('click', eventHandler);
 container3.addEventListener('click', eventHandler);
 
 function eventHandler(e){
-    
+    console.log('This is event handler!');
 }
