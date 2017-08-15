@@ -8,13 +8,9 @@ function ImageDisplay (name, filePath, elementId) {
     this.displayCount = 0;
     this.voteCount = 0;
 
-    //push new object to imageArray
+    //Push new object to imageArray
     imageArray.push( this );
 }
-
-ImageDisplay.prototype.addToDom = function() {
-    console.log('you are in the addToDom method');
-};
 
 function initializeImages(){
     var bag = new ImageDisplay('Bag', 'image/bag.jpg', 'bag');
@@ -51,37 +47,49 @@ function randomThreeNumbers(){
     return selected;
 }
 
+//Generates array of three random numbers, displays corresponding images from imageArray
+function addToDom() {
+    console.log('you are in the addToDom method');
+
+    //create containers for images
+    var container1 = document.getElementById('image1');
+    var container2 = document.getElementById('image2');
+    var container3 = document.getElementById('image3');
+
+    //create images
+    var firstImage = document.createElement('img');
+    var secondImage = document.createElement('img');
+    var thirdImage = document.createElement('img');
+
+    var threeImages = randomThreeNumbers();
+
+    //Set src attribute to images
+    firstImage.setAttribute( 'src' , imageArray[threeImages[0]].filePath );
+    secondImage.setAttribute( 'src' , imageArray[threeImages[1]].filePath );
+    thirdImage.setAttribute( 'src' , imageArray[threeImages[2]].filePath );
+
+    //TO DO: Display image.name property alongside corresponding image
+
+    //Display Images
+    image1.appendChild(firstImage);
+    image2.appendChild(secondImage);
+    image3.appendChild(thirdImage);
+
+    //Event Listeners
+    container1.addEventListener('click', eventHandler);
+    container2.addEventListener('click', eventHandler);
+    container3.addEventListener('click', eventHandler);
+
+};
+
+//Removes the current three images. TO DO: store their values somehow?
+function removeFromDom() {
+    
+}
+
 initializeImages();
-
-//create containers for images
-var container1 = document.getElementById('image1');
-var container2 = document.getElementById('image2');
-var container3 = document.getElementById('image3');
-
-//create images
-var firstImage = document.createElement('img');
-var secondImage = document.createElement('img');
-var thirdImage = document.createElement('img');
-
-var threeImages = randomThreeNumbers();
-
-//Set src attribute to images
-firstImage.setAttribute( 'src' , imageArray[threeImages[0]].filePath );
-secondImage.setAttribute( 'src' , imageArray[threeImages[1]].filePath );
-thirdImage.setAttribute( 'src' , imageArray[threeImages[2]].filePath );
-
-//TO DO: Display image.name property alongside corresponding image
-
-//Display Images
-image1.appendChild(firstImage);
-image2.appendChild(secondImage);
-image3.appendChild(thirdImage);
-
-//Event Listeners
-container1.addEventListener('click', eventHandler);
-container2.addEventListener('click', eventHandler);
-container3.addEventListener('click', eventHandler);
+addToDom();
 
 function eventHandler(e){
-    console.log('This is event handler!');
+    addToDom();
 }
