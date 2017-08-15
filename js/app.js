@@ -91,10 +91,11 @@ function addToDom() {
         container2.addEventListener('click', eventHandler);
         container3.addEventListener('click', eventHandler);
 
-        forbiddenIndexes = [threeImages[0], threeImages[1], threeImages[2]];
+        forbiddenIndices = [threeImages[0], threeImages[1], threeImages[2]];
     }
     else {
         var resultsContainer = document.getElementById('images');
+        resultsContainer.innerHTML = '';
         var results = document.createElement('ul');
         results.id = 'results';
         resultsContainer.appendChild(results);
@@ -108,10 +109,10 @@ function addToDom() {
     }
 };
 
+//On click, uptick vote count of respective item in imageArray, run removeFromDom & addToDom methods
 function eventHandler(){
-    //On click, uptick vote count of respective item in imageArray
     console.log(imageArray[event.target.getAttribute( 'data-index')].name);
-    imageArray[event.target.getAttribute( 'data-index')].voteCount++;
+    imageArray[event.target.getAttribute( 'data-index' )].voteCount++;
     voteCounter++;
     removeFromDom();
     addToDom();
@@ -129,5 +130,3 @@ function removeFromDom() {
 
 initializeImages();
 addToDom();
-
-
