@@ -59,8 +59,6 @@ function addToDom() {
     if ( voteCounter < 3 ){
         //create containers for images
         var container = document.getElementById('images');
-        // var container2 = document.getElementById('image2');
-        // var container3 = document.getElementById('image3');
 
         //create images
         var firstImage = document.createElement('img');
@@ -89,8 +87,6 @@ function addToDom() {
 
         //Event Listeners //TO DO: make just one listener and use bubbling
         container.addEventListener('click', eventHandler);
-        // container2.addEventListener('click', eventHandler);
-        // container3.addEventListener('click', eventHandler);
 
         forbiddenIndices = [threeImages[0], threeImages[1], threeImages[2]];
     }
@@ -101,13 +97,59 @@ function addToDom() {
         var results = document.createElement('ul');
         results.id = 'results';
         resultsContainer.appendChild(results);
-
+        //Populate results list -- TO DO: Put chart stuff here
         var allResults = document.getElementById('results');
         for (var i = 0; i < imageArray.length; i++ ){
             results = document.createElement('li');
             results.innerHTML = imageArray[i].name + ': ' + imageArray[i].voteCount + ' votes';
             allResults.appendChild(results);
         }
+        //Chart Stuff Below
+        var chartCanvas = document.getElementById( 'chart' );
+        //Create array variable for labels of all imageArray items
+        var allLabels = [];
+        for (var i = 0; i < imageArray.length; i++) {
+            allLabels.push(imageArray[i].name);
+        }
+        var dataChart = new Chart (chartCanvas, {
+            type: 'bar',
+            data: {
+                labels: ['jan', 'feb', 'mar'],
+                datasets: [{ 
+                    labels: 'american airlines', 
+                    data: [100, 50, 600, 800],
+                    lineTension: 0,
+                },{
+                    labels: 'delta',
+                    data: [420, 69, 420, 69],
+                    lineTension: 0,
+                    backgroundColor: 'rgb(255,255,255)',
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'flight prices',
+                },
+                legend: {
+                    display: false
+                }
+            }
+        
+        });
+    
+        /*
+    {
+            type:'bar',
+            data: {
+                labels: [;bag', 'banana', '...'],
+                datasets: [
+                    {
+                        label: 'Voter 1', //label for votes
+                        data [0,4,3,9] // number of votes corresponding with label
+                    }
+                ]
+            }
     }
 };
 
@@ -120,7 +162,7 @@ function eventHandler(){
     addToDom();
 }
 
-//Removes the current three images. TO DO: store their values somehow? Possibly change this to "repopulate DOM"
+//Removes the current three images.
 function removeFromDom() {
     var imageContainer = document.getElementById('image1');
     imageContainer.innerHTML = '';
