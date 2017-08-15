@@ -1,6 +1,7 @@
 //Create blank array to store all image objects
 var imageArray = [];
-var forbiddenIndexes = ['','',''];
+var forbiddenIndices = ['','',''];
+var voteCounter = 0;
 
 function ImageDisplay (name, filePath, elementId) {
     this.name = name;
@@ -42,7 +43,7 @@ function randomThreeNumbers(){
     var selected = [];
     while (selected.length < 3){
         var numberToAdd = Math.floor(Math.random() * imageArray.length);
-        if ( !forbiddenIndexes.includes(numberToAdd) ) {
+        if ( !forbiddenIndices.includes(numberToAdd) ) {
             if ( !selected.includes(numberToAdd) ) {
                 selected.push(numberToAdd);
                 imageArray[numberToAdd].displayCount++;
@@ -54,49 +55,63 @@ function randomThreeNumbers(){
 
 //Generates array of three random numbers, displays corresponding images from imageArray
 function addToDom() {
+    if ( voteCounter < 5 ){
+        //create containers for images
+        var container1 = document.getElementById('image1');
+        var container2 = document.getElementById('image2');
+        var container3 = document.getElementById('image3');
 
-    //create containers for images
-    var container1 = document.getElementById('image1');
-    var container2 = document.getElementById('image2');
-    var container3 = document.getElementById('image3');
+        //create images
+        var firstImage = document.createElement('img');
+        var secondImage = document.createElement('img');
+        var thirdImage = document.createElement('img');
 
-    //create images
-    var firstImage = document.createElement('img');
-    var secondImage = document.createElement('img');
-    var thirdImage = document.createElement('img');
+        //Generate three random numbers and assign to threeImages variable
+        var threeImages = randomThreeNumbers();
 
-    //Generate three random numbers and assign to threeImages variable
-    var threeImages = randomThreeNumbers();
+        //Set src attribute to images
+        firstImage.setAttribute( 'src' , imageArray[threeImages[0]].filePath );
+        secondImage.setAttribute( 'src' , imageArray[threeImages[1]].filePath );
+        thirdImage.setAttribute( 'src' , imageArray[threeImages[2]].filePath );
 
-    //Set src attribute to images
-    firstImage.setAttribute( 'src' , imageArray[threeImages[0]].filePath );
-    secondImage.setAttribute( 'src' , imageArray[threeImages[1]].filePath );
-    thirdImage.setAttribute( 'src' , imageArray[threeImages[2]].filePath );
+        //Assign data index to image containers  MIGHT NOT BE NECESSARY
+        firstImage.setAttribute( 'data-index' , threeImages[0] );
+        secondImage.setAttribute( 'data-index' , threeImages[1] );
+        thirdImage.setAttribute( 'data-index' , threeImages[2] );
 
-    //Assign data index to image containers  MIGHT NOT BE NECESSARY
-    firstImage.setAttribute( 'data-index' , threeImages[0] );
-    secondImage.setAttribute( 'data-index' , threeImages[1] );
-    thirdImage.setAttribute( 'data-index' , threeImages[2] );
+        //TO DO: Display image.name property alongside corresponding image
 
-    //TO DO: Display image.name property alongside corresponding image
+        //Display Images
+        image1.appendChild(firstImage);
+        image2.appendChild(secondImage);
+        image3.appendChild(thirdImage);
 
-    //Display Images
-    image1.appendChild(firstImage);
-    image2.appendChild(secondImage);
-    image3.appendChild(thirdImage);
+        //Event Listeners
+        container1.addEventListener('click', eventHandler);
+        container2.addEventListener('click', eventHandler);
+        container3.addEventListener('click', eventHandler);
 
-    //Event Listeners
-    container1.addEventListener('click', eventHandler);
-    container2.addEventListener('click', eventHandler);
-    container3.addEventListener('click', eventHandler);
+        forbiddenIndexes = [threeImages[0], threeImages[1], threeImages[2]];
+    }
+    else {
+        var resultsContainer = document.getElementById('images');
+        var results = document.createElement('ul');
+        results.id = 'results';
+        resultsContainer.appendChild(results);
 
-    forbiddenIndexes = [threeImages[0], threeImages[1], threeImages[2]];
+        var allResults = document.getElementById('results');
+        for (var i = 0; i < imageArray.length; i++ ){
+            results = document.createElement('li');
+            results.innerHTML = imageArray[i].name + ': ' + imageArray[i].voteCount + ' votes';
+        }
+    }
 };
 
 function eventHandler(){
     //On click, uptick vote count of respective item in imageArray
     console.log(imageArray[event.target.getAttribute( 'data-index')].name);
     imageArray[event.target.getAttribute( 'data-index')].voteCount++;
+    voteCounter++;
     removeFromDom();
     addToDom();
 }
@@ -113,4 +128,5 @@ function removeFromDom() {
 
 initializeImages();
 addToDom();
+
 
