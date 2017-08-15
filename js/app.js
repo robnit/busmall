@@ -96,7 +96,7 @@ function addToDom() {
         document.querySelector('h1').outerHTML = '';
         document.getElementById('images').outerHTML = '';
 
-        //Create arrays for names and voteCounts of all imageArray items
+        //Create arrays for names, voteCounts, and random colors for all imageArray items
         var allLabels = [];
         var allVoteCounts = [];
         var randomColors = [];
@@ -113,7 +113,7 @@ function addToDom() {
                     // labels: 'Voter 1',
                     data: allVoteCounts,
                     backgroundColor: randomColors
-                    
+
                 }]
             },
             options: {
@@ -128,6 +128,7 @@ function addToDom() {
                 scales: {
                     xAxes: [{
                         ticks: {
+                            beginAtZero: true,
                             stepSize: 1
                         }
                     }]
@@ -139,11 +140,16 @@ function addToDom() {
 
 //On click, uptick vote count of respective item in imageArray, run removeFromDom & addToDom methods
 function eventHandler(){
-    console.log(imageArray[event.target.getAttribute( 'data-index')].name);
-    imageArray[event.target.getAttribute( 'data-index' )].voteCount++;
-    voteCounter++;
-    removeFromDom();
-    addToDom();
+    //Do nothing if clicked outside target images
+    if (event.target.id == 'images'){
+    }
+    else {
+        console.log(imageArray[event.target.getAttribute( 'data-index')].name);
+        imageArray[event.target.getAttribute( 'data-index' )].voteCount++;
+        voteCounter++;
+        removeFromDom();
+        addToDom();
+    }
 }
 
 //Removes the current three images.
