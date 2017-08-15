@@ -1,0 +1,21 @@
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+img {
+    height: 220px;
+    border: 1px;
+    color: black;
+    border-style: solid;
+}
+
+#images {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    list-style: none;
+    width: 80%;
+}
