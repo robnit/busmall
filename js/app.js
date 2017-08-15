@@ -6,13 +6,14 @@ function ImageDisplay (name, filePath, elementId) {
     this.name = name;
     this.filePath = filePath;
     this.elementId = elementId;
-    this.displayCount = 0
+    this.displayCount = 0;
     this.voteCount = 0;
 
     //Push new object to imageArray
     imageArray.push( this );
 }
 
+//Populate imageArray with all image objects
 function initializeImages(){
     var bag = new ImageDisplay('Bag', 'image/bag.jpg', 'bag');
     var banana = new ImageDisplay('Banana', 'image/banana.jpg', 'banana');
@@ -36,7 +37,7 @@ function initializeImages(){
     var wineglass = new ImageDisplay('Wine Glass','image/wine-glass.jpg','wineglass');
 }
 
-//Generate three random indices for image Array TO DO: ADD FORBIDDENVARIABLE CLAUSE
+//Generate three random indices for image Array
 function randomThreeNumbers(){
     var selected = [];
     while (selected.length < 3){
