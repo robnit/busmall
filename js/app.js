@@ -1,5 +1,6 @@
 //Create blank array to store all image objects
 var imageArray = [];
+var previousImageArray = [];
 var forbiddenIndices = ['','',''];
 var voteCounter = 0;
 
@@ -122,17 +123,28 @@ function addToDom() {
         var allLabels = [];
         var allVoteCounts = [];
         var randomColors = [];
+        var currentSessionVoteCounts = [];
         for (var i = 0; i < imageArray.length; i++) {
+            //Total
             allLabels.push(imageArray[i].name);
             allVoteCounts.push(imageArray[i].voteCount);
             randomColors.push('#' + Math.random().toString(16).slice(2, 8).toUpperCase());
+
+            //Current Session
+            var previousSession = JSON.parse(localStorage.getItem('storedArray'));
+            if (previousSession) {
+                //Subtract vote count of previous array from current array
+                var currentVoteCount = imageArray[i].voteCount - previousImageArray[i].voteCount;
+                console.log(currentVoteCount + ' new votes for ' + imageArray[i].name)
+                currentSessionVoteCounts.push(currentVoteCount);
+            }
         }
         var dataChart = new Chart (chartCanvas, {
             type: 'horizontalBar',
             data: {
                 labels: allLabels,
                 datasets: [{
-                    // labels: 'Voter 1',
+                    labels: 'All Votes',
                     data: allVoteCounts,
                     backgroundColor: randomColors
 
@@ -190,11 +202,14 @@ function removeFromDom() {
 
 //Code that runs on page load
 function onPageLoad() {
+    //Check if previous session exists in local storage. If found, previous Session is assigned to previousImageArray variable
     var previousSession = JSON.parse(localStorage.getItem('storedArray'));
     if (previousSession) {
         imageArray = previousSession;
+        previousImageArray = previousSession.map( a => Object.assign( {}, a ));
         addToDom();
     }
+    //Otherwise, run initial session
     else {
         initializeImages();
         addToDom();
