@@ -144,10 +144,13 @@ function addToDom() {
             data: {
                 labels: allLabels,
                 datasets: [{
-                    labels: 'All Votes',
+                    labels: 'Total Votes',
                     data: allVoteCounts,
                     backgroundColor: randomColors
 
+                },{
+                    labels: 'Current Session',
+                    data: currentSessionVoteCounts
                 }]
             },
             options: {
