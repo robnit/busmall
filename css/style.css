@@ -19,3 +19,10 @@ img {
     list-style: none;
     width: 80%;
 }
+
+li {
+    display:flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+}
