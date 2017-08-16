@@ -15,7 +15,7 @@ function ImageDisplay (name, filePath, elementId) {
 }
 
 //Populate imageArray with all image objects
-function initializeImages(){
+function initializeImages() {
     var bag = new ImageDisplay('Bag', 'image/bag.jpg', 'bag');
     var banana = new ImageDisplay('Banana', 'image/banana.jpg', 'banana');
     var bathroom = new ImageDisplay('Bathroom', 'image/bathroom.jpg', 'bathroom');
@@ -39,12 +39,11 @@ function initializeImages(){
 }
 
 //Generate three random indices for image Array
-function randomThreeNumbers(){
+function randomThreeNumbers() {
     var selected = [];
     while (selected.length < 3){
         var numberToAdd = Math.floor(Math.random() * imageArray.length);
         if ( !forbiddenIndices.includes(numberToAdd) ) {
-            // console.log(forbiddenIndices + ' does not include ' + numberToAdd);
             if ( !selected.includes(numberToAdd) ) {
                 selected.push(numberToAdd);
                 imageArray[numberToAdd].displayCount++;
@@ -56,11 +55,9 @@ function randomThreeNumbers(){
 
 //Generates array of three random numbers, displays corresponding images from imageArray
 function addToDom() {
-    if ( voteCounter < 3 ){
+    if ( voteCounter < 25 ){
         //create containers for images
         var container = document.getElementById('images');
-        // var container2 = document.getElementById('image2');
-        // var container3 = document.getElementById('image3');
 
         //create images
         var firstImage = document.createElement('img');
@@ -87,40 +84,77 @@ function addToDom() {
         image2.appendChild(secondImage);
         image3.appendChild(thirdImage);
 
-        //Event Listeners //TO DO: make just one listener and use bubbling
+        //Event Listeners 
         container.addEventListener('click', eventHandler);
-        // container2.addEventListener('click', eventHandler);
-        // container3.addEventListener('click', eventHandler);
 
         forbiddenIndices = [threeImages[0], threeImages[1], threeImages[2]];
     }
     else {
-        // container.removeEventListener('click', eventHandler)
-        var resultsContainer = document.getElementById('images');
-        resultsContainer.innerHTML = '';
-        var results = document.createElement('ul');
-        results.id = 'results';
-        resultsContainer.appendChild(results);
+        //Remove hidden attribute from canvas element
+        document.getElementById('chart').removeAttribute('hidden');
+        //Generate chart based on chart.js library
+        var chartCanvas = document.getElementById( 'chart' ).getContext( '2d' );
+        //Remove h1 and image container elements
+        document.querySelector('h1').outerHTML = '';
+        document.getElementById('images').outerHTML = '';
 
-        var allResults = document.getElementById('results');
-        for (var i = 0; i < imageArray.length; i++ ){
-            results = document.createElement('li');
-            results.innerHTML = imageArray[i].name + ': ' + imageArray[i].voteCount + ' votes';
-            allResults.appendChild(results);
+        //Create arrays for names, voteCounts, and random colors for all imageArray items
+        var allLabels = [];
+        var allVoteCounts = [];
+        var randomColors = [];
+        for (var i = 0; i < imageArray.length; i++) {
+            allLabels.push(imageArray[i].name);
+            allVoteCounts.push(imageArray[i].voteCount);
+            randomColors.push('#' + Math.random().toString(16).slice(2, 8).toUpperCase());
         }
+        var dataChart = new Chart (chartCanvas, {
+            type: 'horizontalBar',
+            data: {
+                labels: allLabels,
+                datasets: [{
+                    // labels: 'Voter 1',
+                    data: allVoteCounts,
+                    backgroundColor: randomColors
+
+                }]
+            },
+            options: {
+                responsive: false,
+                title: {
+                    display: true,
+                    text: 'Vote Breakdown',
+                },
+                legend: {
+                    display: false
+                },
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 1
+                        }
+                    }]
+                }
+            }
+        });
     }
-};
+}
 
 //On click, uptick vote count of respective item in imageArray, run removeFromDom & addToDom methods
 function eventHandler(){
-    console.log(imageArray[event.target.getAttribute( 'data-index')].name);
-    imageArray[event.target.getAttribute( 'data-index' )].voteCount++;
-    voteCounter++;
-    removeFromDom();
-    addToDom();
+    //Do nothing if clicked outside target images
+    if (event.target.id == 'images'){
+    }
+    else {
+        console.log(imageArray[event.target.getAttribute( 'data-index')].name);
+        imageArray[event.target.getAttribute( 'data-index' )].voteCount++;
+        voteCounter++;
+        removeFromDom();
+        addToDom();
+    }
 }
 
-//Removes the current three images. TO DO: store their values somehow? Possibly change this to "repopulate DOM"
+//Removes the current three images.
 function removeFromDom() {
     var imageContainer = document.getElementById('image1');
     imageContainer.innerHTML = '';
