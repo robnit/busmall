@@ -14,6 +14,10 @@ function ImageDisplay (name, filePath, elementId) {
     imageArray.push( this );
 }
 
+// TO DO: on load, get existing images from localstorage. if not, run initializeImages
+// if they exist, use them to create images, otherwise, create objects from below
+// make sure to save to imageArray
+
 //Populate imageArray with all image objects
 function initializeImages() {
     var bag = new ImageDisplay('Bag', 'image/bag.jpg', 'bag');
@@ -77,12 +81,24 @@ function addToDom() {
         secondImage.setAttribute( 'data-index' , threeImages[1] );
         thirdImage.setAttribute( 'data-index' , threeImages[2] );
 
-        //TO DO: Display image.name property alongside corresponding image
-
         //Display Images
         image1.appendChild(firstImage);
         image2.appendChild(secondImage);
         image3.appendChild(thirdImage);
+
+        //Display corresponding captions
+
+        var imageCaption1 = document.getElementById('image1');
+        var imageCaption2 = document.getElementById('image2');
+        var imageCaption3 = document.getElementById('image3');
+
+        var imageCaptionContent1 = imageCaption1.createElement('caption');
+        var imageCaptionContent2 = imageCaption2.createElement('caption');
+        var imageCaptionContent3 = imageCaption3.createElement('caption');
+
+        imageCaptionContent1.innerText = threeImages[0].name;
+        imageCaptionContent1.innerText = threeImages[1].name;
+        imageCaptionContent1.innerText = threeImages[2].name;
 
         //Event Listeners 
         container.addEventListener('click', eventHandler);
@@ -137,7 +153,10 @@ function addToDom() {
                 }
             }
         });
-    }
+
+        //TO DO: save object data to localStorage
+
+    } //End of else
 }
 
 //On click, uptick vote count of respective item in imageArray, run removeFromDom & addToDom methods
