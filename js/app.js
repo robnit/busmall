@@ -158,7 +158,8 @@ function addToDom() {
             }
         });
 
-        //TO DO: save object data to localStorage
+        //Save imageArray variable to localStorage
+        localStorage.setItem('storedArray', JSON.stringify(imageArray));
 
     } //End of else
 }
@@ -187,5 +188,17 @@ function removeFromDom() {
     imageContainer.innerHTML = '';
 }
 
-initializeImages();
-addToDom();
+//Code that runs on page load
+function onPageLoad() {
+    var previousSession = JSON.parse(localStorage.getItem('storedArray'));
+    if (previousSession) {
+        imageArray = previousSession;
+        addToDom();
+    }
+    else {
+        initializeImages();
+        addToDom();
+    }
+}
+
+onPageLoad();
