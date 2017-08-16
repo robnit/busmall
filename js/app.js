@@ -90,6 +90,8 @@ function addToDom() {
         forbiddenIndices = [threeImages[0], threeImages[1], threeImages[2]];
     }
     else {
+        //Remove hidden attribute from canvas element
+        document.getElementById('chart').removeAttribute('hidden');
         //Generate chart based on chart.js library
         var chartCanvas = document.getElementById( 'chart' ).getContext( '2d' );
         //Remove h1 and image container elements
