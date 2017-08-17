@@ -128,14 +128,13 @@ function addToDom() {
             //Total
             allLabels.push(imageArray[i].name);
             allVoteCounts.push(imageArray[i].voteCount);
-            randomColors.push('#' + Math.random().toString(16).slice(2, 8).toUpperCase());
+            // randomColors.push('#' + Math.random().toString(16).slice(2, 8).toUpperCase());  Random colors not being used currently
 
             //Current Session
             var previousSession = JSON.parse(localStorage.getItem('storedArray'));
             if (previousSession) {
                 //Subtract vote count of previous array from current array
                 var currentVoteCount = imageArray[i].voteCount - previousImageArray[i].voteCount;
-                console.log(currentVoteCount + ' new votes for ' + imageArray[i].name)
                 currentSessionVoteCounts.push(currentVoteCount);
             }
         }
@@ -144,13 +143,15 @@ function addToDom() {
             data: {
                 labels: allLabels,
                 datasets: [{
-                    labels: 'Total Votes',
-                    data: allVoteCounts,
-                    backgroundColor: randomColors
-
+                    label: 'Current Session',
+                    data: currentSessionVoteCounts,
+                    backgroundColor: '#82c0ff'
+                    
                 },{
-                    labels: 'Current Session',
-                    data: currentSessionVoteCounts
+                    label: 'Total Votes',
+                    data: allVoteCounts,
+                    backgroundColor: '#ff237b'
+
                 }]
             },
             options: {
@@ -160,7 +161,7 @@ function addToDom() {
                     text: 'Vote Breakdown',
                 },
                 legend: {
-                    display: false
+                    display: true,
                 },
                 scales: {
                     xAxes: [{
@@ -168,7 +169,7 @@ function addToDom() {
                             beginAtZero: true,
                             stepSize: 1
                         }
-                    }]
+                    }],
                 }
             }
         });
