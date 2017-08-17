@@ -108,8 +108,8 @@ function addToDom() {
         forbiddenIndices = [threeImages[0], threeImages[1], threeImages[2]];
     }
     else {
-        //Remove hidden attribute from canvas element
-        document.getElementById('chart').removeAttribute('hidden');
+        //Set chart display to not hidden
+        document.getElementById('chart').setAttribute('style','display:flex');
         //Generate chart based on chart.js library
         var chartCanvas = document.getElementById( 'chart' ).getContext( '2d' );
         //Remove h1 and image container elements
@@ -139,6 +139,9 @@ function addToDom() {
         //Hide h1 and images elements
         document.getElementById('images').setAttribute('style','display:none');
         document.querySelector('h1').setAttribute('style','display:none');
+
+        //Show reset button
+        document.getElementById('newSessionButton').setAttribute('style','display:initial');
 
         //Set chart display property to initial, in case if it's hidden
         var chartContainer = document.getElementById('chart');
@@ -180,7 +183,7 @@ function addToDom() {
                 }
             }
         });
-        //Second event listener for doomsday button
+        //Event listener for doomsday button
         var doomsdayButton = document.getElementById('clearButton');
         doomsdayButton.addEventListener('click', removeChartElement);
 
@@ -189,6 +192,26 @@ function addToDom() {
             var chartContainer = document.getElementById('chart');
             chartContainer.setAttribute('style', 'display:none');
         };
+
+        //Event listener for New Session button
+        var resetButton = document.getElementById('newSessionButton');
+        resetButton.addEventListener('click', startNewSession);
+
+        function startNewSession() {
+            removeChartElement();
+            resetButton.setAttribute('style', 'display:none');
+            voteCounter = 0;
+            // Rebuild
+            document.getElementById('images').setAttribute('style','display:flex');
+            document.querySelector('h1').setAttribute('style','display:flex');
+            var newImageContainer = document.getElementById('images');
+            for (var i = 1; i < 4; i++) {
+                var makeNewImage = document.createElement('li');
+                makeNewImage.id = 'image' + i;
+                newImageContainer.appendChild(makeNewImage);
+            }
+            addToDom();
+        }
 
         //Save imageArray variable to localStorage
         localStorage.setItem('storedArray', JSON.stringify(imageArray));
@@ -262,6 +285,7 @@ function doomsday() {
         imageArray[i].displayCount = 0;
     }
     localStorage.clear();
+    document.getElementById('newSessionButton').setAttribute('style','display:none');
 
     // Rebuild
     document.getElementById('images').setAttribute('style','display:flex');
@@ -273,7 +297,6 @@ function doomsday() {
         newImageContainer.appendChild(makeNewImage);
     }
     addToDom();
-    ;
 }
 
 onPageLoad();
