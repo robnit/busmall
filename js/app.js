@@ -208,8 +208,7 @@ function onPageLoad() {
     var previousSession = JSON.parse(localStorage.getItem('storedArray'));
     if (previousSession) {
         imageArray = previousSession;
-        //DISCLAIMER: I DID NOT WRITE THIS LINE. I STOLE IT FROM SOME STACKOVERFLOW GENIUS
-        previousImageArray = previousSession.map( a => Object.assign( {}, a ));
+        previousImageArray = JSON.parse(localStorage.getItem('storedArray'));
         addToDom();
     }
     //Otherwise, run initial session
@@ -221,7 +220,7 @@ function onPageLoad() {
 
 // //Button to clear all display count, vote count, and localStorage data
 var buttonContainer = document.getElementById('clearButton');
-buttonContainer.addEventListener('click', doomsday)
+buttonContainer.addEventListener('click', doomsday);
 
 function doomsday() {
     //Destroy
