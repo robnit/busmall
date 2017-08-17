@@ -135,6 +135,11 @@ function addToDom() {
                 currentSessionVoteCounts.push(currentVoteCount);
             }
         }
+
+        //Hide h1 and images elements
+        document.getElementById('images').setAttribute('style','display:none');
+        document.querySelector('h1').setAttribute('style','display:none');
+
         //Set chart display property to initial, in case if it's hidden
         var chartContainer = document.getElementById('chart');
         chartContainer.setAttribute('style', 'display:initial');
@@ -258,7 +263,9 @@ function doomsday() {
     }
     localStorage.clear();
 
-    // // Rebuild
+    // Rebuild
+    document.getElementById('images').setAttribute('style','display:flex');
+    document.querySelector('h1').setAttribute('style','display:flex');
     var newImageContainer = document.getElementById('images');
     for (var i = 1; i < 4; i++) {
         var makeNewImage = document.createElement('li');
