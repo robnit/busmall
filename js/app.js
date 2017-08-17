@@ -57,7 +57,7 @@ function randomThreeNumbers() {
 //Generates array of three random numbers, displays corresponding images from imageArray.
 //If voteCounter exceeds quota, runs 
 function addToDom() {
-    if ( voteCounter < 25 ){
+    if ( voteCounter < 5 ){
         //create containers for images
         var container = document.getElementById('images');
 
@@ -114,7 +114,7 @@ function addToDom() {
         var chartCanvas = document.getElementById( 'chart' ).getContext( '2d' );
         //Remove h1 and image container elements
         document.querySelector('h1').outerHTML = '';
-        document.getElementById('images').outerHTML = '';
+        document.getElementById('images').innerHTML = '';
 
         //Create arrays for names, voteCounts, and random colors for all imageArray items
         var allLabels = [];
@@ -170,11 +170,16 @@ function addToDom() {
                 }
             }
         });
+        //Second event listener for doomsday button
+        var doomsdayButton = document.getElementById('clearButton');
+        doomsdayButton.addEventListener('click', removeChartElement);
+
+        function removeChartElement(){
+            dataChart.destroy();
+        };
 
         //Save imageArray variable to localStorage
         localStorage.setItem('storedArray', JSON.stringify(imageArray));
-    
-    
     } //End of else
 }
 
@@ -225,16 +230,22 @@ buttonContainer.addEventListener('click', doomsday);
 function doomsday() {
     //Destroy
     votecounter = 0;
-    removeFromDom();
+    // removeFromDom();
     for (var i = 0; i < imageArray.length; i++) {
         imageArray[i].voteCount = 0;
         imageArray[i].displayCount = 0;
     }
     localStorage.clear();
 
-    //Rebuild
-    addToDom();
-    ;
+    // Rebuild
+    // var newImageContainer = document.getElementById('images');
+    // for (var i = 1; i < 4; i++) {
+    //     var makeNewImage = document.createElement('li');
+    //     makeNewImage.id = 'image' + i;
+    //     newImageContainer.appendChild(makeNewImage);
+    // }
+    // addToDom();
+    // ;
 }
 
 onPageLoad();
