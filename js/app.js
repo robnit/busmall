@@ -176,6 +176,8 @@ function addToDom() {
 
         function removeChartElement(){
             dataChart.destroy();
+            var chartContainer = document.getElementById('chart');
+            chartContainer.setAttribute('hidden', true);
         };
 
         //Save imageArray variable to localStorage
@@ -238,14 +240,14 @@ function doomsday() {
     localStorage.clear();
 
     // Rebuild
-    // var newImageContainer = document.getElementById('images');
-    // for (var i = 1; i < 4; i++) {
-    //     var makeNewImage = document.createElement('li');
-    //     makeNewImage.id = 'image' + i;
-    //     newImageContainer.appendChild(makeNewImage);
-    // }
-    // addToDom();
-    // ;
+    var newImageContainer = document.getElementById('images');
+    for (var i = 1; i < 4; i++) {
+        var makeNewImage = document.createElement('li');
+        makeNewImage.id = 'image' + i;
+        newImageContainer.appendChild(makeNewImage);
+    }
+    addToDom();
+    ;
 }
 
 onPageLoad();
