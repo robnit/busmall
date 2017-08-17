@@ -15,10 +15,6 @@ function ImageDisplay (name, filePath, elementId) {
     imageArray.push( this );
 }
 
-// TO DO: on load, get existing images from localstorage. if not, run initializeImages
-// if they exist, use them to create images, otherwise, create objects from below
-// make sure to save to imageArray
-
 //Populate imageArray with all image objects
 function initializeImages() {
     var bag = new ImageDisplay('Bag', 'image/bag.jpg', 'bag');
@@ -58,7 +54,8 @@ function randomThreeNumbers() {
     return selected;
 }
 
-//Generates array of three random numbers, displays corresponding images from imageArray
+//Generates array of three random numbers, displays corresponding images from imageArray.
+//If voteCounter exceeds quota, runs 
 function addToDom() {
     if ( voteCounter < 25 ){
         //create containers for images
@@ -176,7 +173,8 @@ function addToDom() {
 
         //Save imageArray variable to localStorage
         localStorage.setItem('storedArray', JSON.stringify(imageArray));
-
+    
+    
     } //End of else
 }
 
@@ -210,6 +208,7 @@ function onPageLoad() {
     var previousSession = JSON.parse(localStorage.getItem('storedArray'));
     if (previousSession) {
         imageArray = previousSession;
+        //DISCLAIMER: I DID NOT WRITE THIS LINE. I STOLE IT FROM SOME STACKOVERFLOW GENIUS
         previousImageArray = previousSession.map( a => Object.assign( {}, a ));
         addToDom();
     }
@@ -220,11 +219,12 @@ function onPageLoad() {
     }
 }
 
-//Button to clear all display count, vote count, and localStorage data
+// //Button to clear all display count, vote count, and localStorage data
 var buttonContainer = document.getElementById('clearButton');
 buttonContainer.addEventListener('click', doomsday)
 
 function doomsday() {
+    //Destroy
     votecounter = 0;
     removeFromDom();
     for (var i = 0; i < imageArray.length; i++) {
@@ -232,6 +232,8 @@ function doomsday() {
         imageArray[i].displayCount = 0;
     }
     localStorage.clear();
+
+    //Rebuild
     addToDom();
     ;
 }
