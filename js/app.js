@@ -113,7 +113,7 @@ function addToDom() {
         //Generate chart based on chart.js library
         var chartCanvas = document.getElementById( 'chart' ).getContext( '2d' );
         //Remove h1 and image container elements
-        document.querySelector('h1').outerHTML = '';
+        // document.querySelector('h1').outerHTML = '';
         document.getElementById('images').innerHTML = '';
 
         //Create arrays for names, voteCounts, and random colors for all imageArray items
@@ -135,6 +135,11 @@ function addToDom() {
                 currentSessionVoteCounts.push(currentVoteCount);
             }
         }
+        //Set chart display property to initial, in case if it's hidden
+        var chartContainer = document.getElementById('chart');
+        chartContainer.setAttribute('style', 'display:initial');
+
+        //Create chart
         var dataChart = new Chart (chartCanvas, {
             type: 'horizontalBar',
             data: {
@@ -143,7 +148,7 @@ function addToDom() {
                     label: 'Current Session',
                     data: currentSessionVoteCounts,
                     backgroundColor: '#82c0ff'
-                    
+
                 },{
                     label: 'Total Votes',
                     data: allVoteCounts,
@@ -177,7 +182,7 @@ function addToDom() {
         function removeChartElement(){
             dataChart.destroy();
             var chartContainer = document.getElementById('chart');
-            chartContainer.setAttribute('hidden', true);
+            chartContainer.setAttribute('style', 'display:none');
         };
 
         //Save imageArray variable to localStorage
@@ -199,14 +204,28 @@ function eventHandler(){
     }
 }
 
-//Removes the current three images.
+//Removes the current three images from their elements
 function removeFromDom() {
-    var imageContainer = document.getElementById('image1');
-    imageContainer.innerHTML = '';
-    imageContainer = document.getElementById('image2');
-    imageContainer.innerHTML = '';
-    imageContainer = document.getElementById('image3');
-    imageContainer.innerHTML = '';
+    if (document.getElementById('image1')){
+        var imageContainer = document.getElementById('image1');
+        imageContainer.innerHTML = '';
+        imageContainer = document.getElementById('image2');
+        imageContainer.innerHTML = '';
+        imageContainer = document.getElementById('image3');
+        imageContainer.innerHTML = '';
+    }
+}
+
+//Fully removes all image1-3 elements
+function removeAllImages() {
+    if (document.getElementById('image1')){
+        var imageContainer = document.getElementById('image1');
+        imageContainer.outerHTML = '';
+        imageContainer = document.getElementById('image2');
+        imageContainer.outerHTML = '';
+        imageContainer = document.getElementById('image3');
+        imageContainer.outerHTML = '';
+    }
 }
 
 //Code that runs on page load
@@ -231,15 +250,15 @@ buttonContainer.addEventListener('click', doomsday);
 
 function doomsday() {
     //Destroy
-    votecounter = 0;
-    // removeFromDom();
+    voteCounter = 0;
+    removeAllImages();
     for (var i = 0; i < imageArray.length; i++) {
         imageArray[i].voteCount = 0;
         imageArray[i].displayCount = 0;
     }
     localStorage.clear();
 
-    // Rebuild
+    // // Rebuild
     var newImageContainer = document.getElementById('images');
     for (var i = 1; i < 4; i++) {
         var makeNewImage = document.createElement('li');
