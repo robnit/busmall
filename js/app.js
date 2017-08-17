@@ -220,4 +220,20 @@ function onPageLoad() {
     }
 }
 
+//Button to clear all display count, vote count, and localStorage data
+var buttonContainer = document.getElementById('clearButton');
+buttonContainer.addEventListener('click', doomsday)
+
+function doomsday() {
+    votecounter = 0;
+    removeFromDom();
+    for (var i = 0; i < imageArray.length; i++) {
+        imageArray[i].voteCount = 0;
+        imageArray[i].displayCount = 0;
+    }
+    localStorage.clear();
+    addToDom();
+    ;
+}
+
 onPageLoad();
