@@ -272,11 +272,11 @@ function doomsday() {
     //Destroy
     voteCounter = 0;
     removeAllImages();
-    // for (var i = 0; i < imageArray.length; i++) {
-    //     imageArray[i].voteCount = 0;
-    //     imageArray[i].displayCount = 0;
-    // }
-    // localStorage.clear();
+    for (var i = 0; i < imageArray.length; i++) {
+        imageArray[i].voteCount = 0;
+        imageArray[i].displayCount = 0;
+    }
+    localStorage.clear();
     document.getElementById('newSessionButton').setAttribute('style','display:none');
 
     // Rebuild
