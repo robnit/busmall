@@ -193,6 +193,15 @@ function addToDom() {
             chartContainer.setAttribute('style', 'display:none');
         };
 
+        //Event listener for reset button
+        var resetButtonContainer = document.getElementById('newSessionButton');
+        resetButtonContainer.addEventListener('click', removeChartElement);
+
+        function removeChartElement(){
+            dataChart.destroy();
+            var chartContainer = document.getElementById('chart');
+            chartContainer.setAttribute('style', 'display:none');
+        };
         //Save imageArray variable to localStorage
         localStorage.setItem('storedArray', JSON.stringify(imageArray));
     } //End of else
@@ -263,11 +272,11 @@ function doomsday() {
     //Destroy
     voteCounter = 0;
     removeAllImages();
-    for (var i = 0; i < imageArray.length; i++) {
-        imageArray[i].voteCount = 0;
-        imageArray[i].displayCount = 0;
-    }
-    localStorage.clear();
+    // for (var i = 0; i < imageArray.length; i++) {
+    //     imageArray[i].voteCount = 0;
+    //     imageArray[i].displayCount = 0;
+    // }
+    // localStorage.clear();
     document.getElementById('newSessionButton').setAttribute('style','display:none');
 
     // Rebuild
@@ -286,6 +295,11 @@ function resetButtonHandler() {
     //Destroy
     voteCounter = 0;
     removeAllImages();
+    // for (var i = 0; i < imageArray.length; i++) {
+    //     imageArray[i].voteCount = 0;
+    //     imageArray[i].displayCount = 0;
+    // }
+    // localStorage.clear();
     document.getElementById('newSessionButton').setAttribute('style','display:none');
 
     // Rebuild
