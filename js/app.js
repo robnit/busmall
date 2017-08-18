@@ -193,37 +193,6 @@ function addToDom() {
             chartContainer.setAttribute('style', 'display:none');
         };
 
-        //Event listener for New Session button
-        var resetButton = document.getElementById('newSessionButton');
-        resetButton.addEventListener('click', startNewSession);
-
-        function startNewSession() {
-            removeChartElement();
-            resetButton.setAttribute('style', 'display:none');
-            voteCounter = 0;
-            // Rebuild
-            document.getElementById('images').setAttribute('style','display:flex');
-            document.querySelector('h1').setAttribute('style','display:flex');
-            
-            var newImageContainer = document.getElementById('images');
-            var makeNewImage = document.createElement('li');
-            makeNewImage.id = 'image1';
-            newImageContainer.appendChild(makeNewImage);
-            var makeNewImage = document.createElement('li');
-            makeNewImage.id = 'image2';
-            newImageContainer.appendChild(makeNewImage);
-            var makeNewImage = document.createElement('li');
-            makeNewImage.id = 'image3';
-            newImageContainer.appendChild(makeNewImage);
-
-            // for (var i = 1; i < 4; i++) {
-            //     var makeNewImage = document.createElement('li');
-            //     makeNewImage.id = 'image' + i;
-            //     newImageContainer.appendChild(makeNewImage);
-            // }
-            addToDom();
-        }
-
         //Save imageArray variable to localStorage
         localStorage.setItem('storedArray', JSON.stringify(imageArray));
     } //End of else
@@ -286,6 +255,10 @@ function onPageLoad() {
 var buttonContainer = document.getElementById('clearButton');
 buttonContainer.addEventListener('click', doomsday);
 
+//Button to reset current session
+var resetButton = document.getElementById('newSessionButton');
+resetButton.addEventListener('click', resetButtonHandler);
+
 function doomsday() {
     //Destroy
     voteCounter = 0;
@@ -295,6 +268,24 @@ function doomsday() {
         imageArray[i].displayCount = 0;
     }
     localStorage.clear();
+    document.getElementById('newSessionButton').setAttribute('style','display:none');
+
+    // Rebuild
+    document.getElementById('images').setAttribute('style','display:flex');
+    document.querySelector('h1').setAttribute('style','display:flex');
+    var newImageContainer = document.getElementById('images');
+    for (var i = 1; i < 4; i++) {
+        var makeNewImage = document.createElement('li');
+        makeNewImage.id = 'image' + i;
+        newImageContainer.appendChild(makeNewImage);
+    }
+    addToDom();
+}
+
+function resetButtonHandler() {
+    //Destroy
+    voteCounter = 0;
+    removeAllImages();
     document.getElementById('newSessionButton').setAttribute('style','display:none');
 
     // Rebuild
