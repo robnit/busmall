@@ -74,7 +74,7 @@ function addToDom() {
         secondImage.setAttribute( 'src' , imageArray[threeImages[1]].filePath );
         thirdImage.setAttribute( 'src' , imageArray[threeImages[2]].filePath );
 
-        //Assign data index to image containers  MIGHT NOT BE NECESSARY
+        //Assign data index to image containers
         firstImage.setAttribute( 'data-index' , threeImages[0] );
         secondImage.setAttribute( 'data-index' , threeImages[1] );
         thirdImage.setAttribute( 'data-index' , threeImages[2] );
@@ -204,12 +204,23 @@ function addToDom() {
             // Rebuild
             document.getElementById('images').setAttribute('style','display:flex');
             document.querySelector('h1').setAttribute('style','display:flex');
+            
             var newImageContainer = document.getElementById('images');
-            for (var i = 1; i < 4; i++) {
-                var makeNewImage = document.createElement('li');
-                makeNewImage.id = 'image' + i;
-                newImageContainer.appendChild(makeNewImage);
-            }
+            var makeNewImage = document.createElement('li');
+            makeNewImage.id = 'image1';
+            newImageContainer.appendChild(makeNewImage);
+            var makeNewImage = document.createElement('li');
+            makeNewImage.id = 'image2';
+            newImageContainer.appendChild(makeNewImage);
+            var makeNewImage = document.createElement('li');
+            makeNewImage.id = 'image3';
+            newImageContainer.appendChild(makeNewImage);
+
+            // for (var i = 1; i < 4; i++) {
+            //     var makeNewImage = document.createElement('li');
+            //     makeNewImage.id = 'image' + i;
+            //     newImageContainer.appendChild(makeNewImage);
+            // }
             addToDom();
         }
 
@@ -234,14 +245,13 @@ function eventHandler(){
 
 //Removes the current three images from their elements
 function removeFromDom() {
-    if (document.getElementById('image1')){
-        var imageContainer = document.getElementById('image1');
-        imageContainer.innerHTML = '';
-        imageContainer = document.getElementById('image2');
-        imageContainer.innerHTML = '';
-        imageContainer = document.getElementById('image3');
-        imageContainer.innerHTML = '';
-    }
+    var imageContainer = document.getElementById('image1');
+    imageContainer.innerHTML = '';
+    imageContainer = document.getElementById('image2');
+    imageContainer.innerHTML = '';
+    imageContainer = document.getElementById('image3');
+    imageContainer.innerHTML = '';
+
 }
 
 //Fully removes all image1-3 elements
