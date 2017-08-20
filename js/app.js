@@ -209,16 +209,16 @@ function addToDom() {
 
 //On click, uptick vote count of respective item in imageArray, run removeFromDom & addToDom methods
 function eventHandler(){
-    //Do nothing if clicked outside target images
+    // Do nothing if clicked outside target images
     if (event.target.id == 'images'){
+        return;
     }
-    else {
-        console.log(imageArray[event.target.getAttribute( 'data-index')].name);
-        imageArray[event.target.getAttribute( 'data-index' )].voteCount++;
-        voteCounter++;
-        removeFromDom();
-        addToDom();
-    }
+    console.log(imageArray[event.target.getAttribute( 'data-index')].name);
+    imageArray[event.target.getAttribute( 'data-index' )].voteCount++;
+    voteCounter++;
+    removeFromDom();
+    addToDom();
+
 }
 
 //Removes the current three images from their elements
