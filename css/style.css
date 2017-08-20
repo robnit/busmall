@@ -1,24 +1,31 @@
+body {
+    background-color: #ABF3AB;
+}
 main {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 img {
     height: 220px;
     border: 1px;
-    color: black;
+    border-color: black;
     border-style: solid;
     border-radius: 9px;
+    transition-property: box-shadow;
+    transition-duration: 0.25s;
+    transition-timing-function: ease;
 }
 
 img:hover {
-    box-shadow: 0 0 0 10px rgb(255, 117, 117)
+    box-shadow: 0 0 0 7px rgb(255, 117, 117);
 }
 
 img:active {
-    box-shadow: 0 0 0 10px hsl(0, 100%, 45%)
+    box-shadow: 0 0 0 7px hsl(0, 100%, 45%)
 }
 
 #images {
@@ -30,8 +37,8 @@ img:active {
 }
 
 caption {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 14px;
+    font-size: 16px;
+    font-weight:900;
     margin-top:12px;
 }
 
@@ -40,4 +47,11 @@ li {
     justify-content: space-around;
     flex-direction: column;
     align-items: center;
+}
+
+#clearButton {
+    position: absolute;
+    top:10px;    
+    right:10px;
+    font-size:18px;
 }
