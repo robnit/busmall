@@ -57,7 +57,7 @@ function randomThreeNumbers() {
 //Generates array of three random numbers, displays corresponding images from imageArray.
 //If voteCounter exceeds quota, runs 
 function addToDom() {
-    if ( voteCounter < 5 ){
+    if ( voteCounter < 25 ){
         //create containers for images
         var container = document.getElementById('images');
 
